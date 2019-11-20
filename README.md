@@ -1,4 +1,4 @@
-# `sndalgo`<span>&ndash;</span>primatives for signals and numbers
+# `sndalgo`<span>&ndash;</span>signal / number stuff for creative use
 
 20 nov 2019 | __John Harrington__
 
@@ -20,3 +20,33 @@ sidechainers are all summated within a single body of knowledge.
 scales, chords, progressions, order, and any other hand in building
 sonic phenomena.
 6. modular design, dimensionless, unitless.
+
+## `pitch`
+
+_<span style="color:red;">planning</span>_
+
+this can convert pitches to frequencies, integers to pitches;
+anything that needs conversion, normalization, etc. should be found
+here.
+
+### uses
+
+1. conversion between different units with time-domain
+2. analyzing, creating, and applying scales
+3. transforming numbers into time-domain values
+
+## `midi`
+
+_<span style="color:red;">planning</span>_
+
+this should have both real-time and hard-bodied MIDI utilities.
+
+### uses
+
+1. forming `.mid` files from inputs
+2. reading `.mid` files and exposing an API for them
+3. analyzing MIDI
+4. streaming (duplex) MIDI (hopefully) without dependencies
+
+
+
