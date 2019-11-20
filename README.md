@@ -31,7 +31,7 @@ here.
 
 ### uses
 
-1. conversion between different units with time-domain
+1. conversion between different units with frequency-domain
 2. analyzing, creating, and applying scales
 3. transforming numbers into time-domain values
 
