@@ -29,8 +29,8 @@ set theory, the python data model, functional programming, and an idea of
 computer science concepts like modulus are also good to know.
 """
 
-__author__ = 'John Harrington'
-__version__ = '0.0.1'
+__author__ = "John Harrington"
+__version__ = "0.0.1"
 
 
 def clean_sieve_str(res: str) -> str:
@@ -41,7 +41,7 @@ def clean_sieve_str(res: str) -> str:
     @returns the cleaned string.
     """
 
-    res = ''.join(_ for _ in res.strip() if _ != ' ' and _ != '\n')
+    res = "".join(_ for _ in res.strip() if _ != " " and _ != "\n")
     return res
 
 
@@ -55,14 +55,14 @@ def parse_residual(res: str) -> tuple:
 
     res = clean_sieve_str(res)
 
-    if res[0] == '!':
+    if res[0] == "!" or res[0] == "-":
         neg = True
         res = res[1:]
     else:
         neg = False
 
-    if '@' in res:
-        modulus, shift = (int(_) for _ in res.split('@'))
+    if "@" in res:
+        modulus, shift = (int(_) for _ in res.split("@"))
     else:
         modulus, shift = int(res), 0
 
@@ -80,14 +80,14 @@ def parse_sieve_str(res: str) -> list:
     res = clean_sieve_str(res)
     groups = []
 
-    if '|' in res:
-        for group in res.split('|'):
+    if "|" in res:
+        for group in res.split("|"):
             groups += [parse_sieve_str(group)]
 
         return groups
 
-    if '&' in res:
-        for residual in res.split('&'):
+    if "&" in res:
+        for residual in res.split("&"):
             groups += [parse_residual(residual)]
 
         return groups
@@ -157,23 +157,18 @@ def simplify_group(group: list) -> list:
 
         seek = 0
 
-        while not all(
-            in_residual(
-                s,
-                r),
-            in_residual(
-                s,
-                group[0]),
-            in_residual(
-                s,
-                group[1])) and seek <= m:
+        while (
+            not all(
+                [in_residual(s, r), in_residual(s, group[0]), in_residual(s, group[1])]
+            )
+            and seek <= m
+        ):
             s += 1
             r = (m, s, False)
             seek += 1
 
         if seek == m:
-            raise ValueError(
-                'this combination of residuals have no true values.')
+            raise ValueError("this combination of residuals have no true values.")
 
         return [r]
 
@@ -190,7 +185,7 @@ class Sieve:
     the xenakis sieve, all-in-one class.
     """
 
-    _fmt: str = 'set'
+    _fmt: str = "set"
 
     def __init__(self, m=1, s=None, n=None, r=None, fmt=None):
         """
@@ -231,13 +226,14 @@ class Sieve:
 
         if not loaded:
             raise ValueError(
-                f'the "m" argument is not of types `str`, `int`, or `Sieve`')
+                f'the "m" argument is not of types `str`, `int`, or `Sieve`'
+            )
 
         for idx, group in enumerate(self._residuals):
             for jdx, residual in enumerate(group):
                 self._residuals[idx][jdx] = norm_residual(residual)
 
-        self._cur_group = 'last'
+        self._cur_group = "last"
 
     @property
     def fmt(self) -> str:
@@ -263,11 +259,12 @@ class Sieve:
         @param new: the new format.
         """
 
-        if new in ['set', 'unit', 'bin', 'delta']:
+        if new in ["set", "unit", "bin", "delta"]:
             self._fmt = new
         else:
             print(
-                f'[warn] `{new}` is not a possible option for Sieve.fmt; no changes made')
+                f"[warn] `{new}` is not a possible option for Sieve.fmt; no changes made"
+            )
 
     @property
     def stype(self) -> str:
@@ -280,26 +277,69 @@ class Sieve:
         """
 
         if len(self._residuals) > 1:
-            return 'complex'
+            return "complex"
         elif len(self._residuals) == 1 and len(self._residuals[0]) > 1:
-            return 'compound'
+            return "compound"
         else:
-            return 'simple'
+            return "simple"
 
     @property
-    def simplified(self) -> str:
+    def simple(self) -> str:
         """
         returns a simplified sieve.
         """
 
         sieves = [
-            Sieve(f'{x}@{y}') for x, y, _ in [
-                simplify_group(group)[0] for group in self._residuals]]
+            Sieve(f"{x}@{y}")
+            for x, y, _ in [simplify_group(group)[0] for group in self._residuals]
+        ]
         simple = sieves[0]
         for sieve in sieves[1:]:
             simple = simple | sieve
 
         return simple
+
+    def set(self, z: list) -> list:
+        """
+        returns a resolved sieve for an iterable z in the set format.
+        """
+
+        res = []
+
+        for group in self._residuals:
+            res_g = [for_iter(residual, z) for residual in group]
+            res_g = [v for v in z if all(v in r for r in res_g)]
+            res.append(res_g)
+
+        res = [v for v in z if any(v in g for g in res)]
+
+        return res
+
+    def bin(self, z: list) -> list:
+        """
+        returns a resolved sieve for an iterable z in the bin format.
+        """
+
+        set_ = self.set(z)
+        return list(1 if v in set_ else 0 for v in z)
+
+    def delta(self, z: list) -> list:
+        """
+        returns a resolved sieve for an iterable z in the delta format.
+        """
+
+        set_ = self.set(z)
+        return list(set_[1 + i] - set_[0 + i] for i in range(len(set_) - 1))
+
+    def unit(self, z: list) -> list:
+        """
+        returns a resolved sieve for an iterable z in the unit format.
+        """
+
+        set_ = self.set(z)
+        div = len(z) - 1
+
+        return list(v / div for v in set_)
 
     def __str__(self) -> str:
         """
@@ -309,18 +349,20 @@ class Sieve:
         string = []
 
         for group in self._residuals:
-            string.append(' & '.join(
-                [f'{"!" if n else ""}{m}@{s}' for m, s, n in group]))
+            string.append(
+                " & ".join([f'{"!" if n else ""}{m}@{s}' for m, s, n in group])
+            )
 
-        return ' | '.join(string)
+        return " | ".join(string)
 
     def __repr__(self) -> str:
         """
         this string can be used with `eval()` if you wanted to.
         """
+
         return f"Sieve('{str(self)}')"
 
-    def __or__(self, other) -> 'Sieve':
+    def __or__(self, other) -> "Sieve":
         """
         returns a complex sieve with union on the other.
 
@@ -328,7 +370,7 @@ class Sieve:
         """
 
         if not type(other) in [str, tuple, Sieve]:
-            raise ValueError('you can only & str, tuple, and Sieves.')
+            raise ValueError("you can only & str, tuple, and Sieves.")
 
         if isinstance(other, str):
             other = Sieve(other)
@@ -337,18 +379,20 @@ class Sieve:
             other = Sieve(*other)
 
         if isinstance(other, Sieve):
-            if other.stype == 'simple':
+            if other.stype == "simple":
                 push = [(other._residuals[0][0])]
-            elif other.stype == 'compound':
-                push = [(residual[0], residual[1], residual[2])
-                        for residual in other._residuals[0]]
+            elif other.stype == "compound":
+                push = [
+                    (residual[0], residual[1], residual[2])
+                    for residual in other._residuals[0]
+                ]
 
             new = Sieve(self)
             new._residuals.append(push)
 
             return new
 
-    def __and__(self, other) -> 'Sieve':
+    def __and__(self, other) -> "Sieve":
         """
         returns a sieve after applying an and operation to the last available
         residual. this means, if you chain multiple groups using | it will actually
@@ -359,7 +403,7 @@ class Sieve:
         """
 
         if not type(other) in [str, tuple, Sieve]:
-            raise ValueError('you can only & str, tuple, and Sieves.')
+            raise ValueError("you can only & str, tuple, and Sieves.")
 
         if isinstance(other, str):
             other = Sieve(other)
@@ -368,28 +412,35 @@ class Sieve:
             other = Sieve(*other)
 
         if isinstance(other, Sieve):
-            if other.stype == 'simple':
+            if other.stype == "simple":
                 push = [(other._residuals[0][0])]
-            elif other.stype == 'compound':
-                push = [(residual[0], residual[1], residual[2])
-                        for residual in other._residuals[0]]
+            elif other.stype == "compound":
+                push = [
+                    (residual[0], residual[1], residual[2])
+                    for residual in other._residuals[0]
+                ]
 
             new = Sieve(self)
-            new._residuals[-1 if self._cur_group ==
-                           'last' else self._cur_group] += push
+            new._residuals[-1 if self._cur_group == "last" else self._cur_group] += push
 
             return new
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # s = Sieve('4@2 & !1 | 3@2 & 7 & 9@2')
     s = Sieve(1, 7)
-    s = s & '3@1' & (7, 3, False)
+    s &= (3, 1, False)
+    s &= (7, 3, False)
     # print(for_iter(s._residuals[0][0], range(128)))
-    s = s.simplified | s
+    s |= (5, 3, False)
     # simps = simplify_group(s._residuals[0])
     # print(s.stype, 'sieve', simps)
-    print(s)
+
+    print(s.set(range(137)))
+    print(s.bin(range(137)))
+    print(s.delta(range(137)))
+    print(s.unit(range(137)))
+    # print(s)
 
     # input()
     # help(__name__)
