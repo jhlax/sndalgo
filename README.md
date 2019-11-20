@@ -1,5 +1,6 @@
 # `sndalgo`<span>&ndash;</span>signal / number stuff for creative use
 
+
 20 nov 2019 | __John Harrington__
 
 ## `xenakis`
@@ -20,6 +21,19 @@ sidechainers are all summated within a single body of knowledge.
 scales, chords, progressions, order, and any other hand in building
 sonic phenomena.
 6. modular design, dimensionless, unitless.
+
+### usage
+
+```python
+from sndalgo.xenakis import Sieve
+
+major_scale = Sieve('-3@2&4|-3@1&4@1|3@2&4@2|-3@0&4@3')
+notes = major_scale.set(range(0,25))
+
+ots = Sieve('1@7') & '3@1' & (7, 3, False)
+
+print(major_scale, major_scale.simple, notes)
+```
 
 ## `pitch`
 
