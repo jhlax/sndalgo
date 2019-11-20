@@ -311,11 +311,15 @@ class Sieve:
         string = []
 
         for group in self._residuals:
-            string.append(' & '.join([f'{"!" if n else ""}{m}@{s}' for m, s, n in group]))
+            string.append(' & '.join(
+                [f'{"!" if n else ""}{m}@{s}' for m, s, n in group]))
 
         return ' | '.join(string)
 
     def __repr__(self) -> str:
+        """
+        this string can be used with `eval()` if you wanted to.
+        """
         return f"Sieve('{str(self)}')"
 
     def __or__(self, other) -> 'Sieve':
@@ -380,14 +384,15 @@ class Sieve:
 
 
 if __name__ == '__main__':
+    __name__ == 'xenakis.py'
     # s = Sieve('4@2 & !1 | 3@2 & 7 & 9@2')
-    s = Sieve(3, 2)
-    s = s & '4@5' & (9, 4, False)
+    s = Sieve(1, 7)
+    s = s & '3@1' & (7, 3, False)
     # print(for_iter(s._residuals[0][0], range(128)))
     s = s.simplified | s
     # simps = simplify_group(s._residuals[0])
     # print(s.stype, 'sieve', simps)
-    print(s._residuals)
+    print(s)
 
     # input()
     # help(__name__)
