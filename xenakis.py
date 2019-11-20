@@ -19,6 +19,14 @@ essentially i want to have one object I can keep sieveing with freeform,
 that keeps track of residuals and assists in doing more complex logic with
 them.
 
+further reading
+---------------
+
+this is meant to be a reimplementation of
+[this article](https://www.mitpressjournals.org/doi/pdf/10.1162/0148926054094396).
+
+set theory, the python data model, functional programming, and an idea of
+computer science concepts like modulus are also good to know.
 """
 
 __author__ = 'John Harrington'
@@ -227,6 +235,10 @@ class Sieve:
             raise ValueError(
                 f'the "m" argument is not of types `str`, `int`, or `Sieve`')
 
+        for idx, group in enumerate(self._residuals):
+            for jdx, residual in enumerate(group):
+                self._residuals[idx][jdx] = norm_residual(residual)
+
         self._cur_group = 'last'
 
     @property
@@ -256,7 +268,8 @@ class Sieve:
         if new in ['set', 'unit', 'bin', 'delta']:
             self._fmt = new
         else:
-            print(f'[warn] `{new}` is not a possible option for Sieve.fmt; no changes made')
+            print(
+                f'[warn] `{new}` is not a possible option for Sieve.fmt; no changes made')
 
     @property
     def stype(self) -> str:
@@ -281,29 +294,57 @@ class Sieve:
         returns a simplified sieve.
         """
 
-        sieves = [Sieve(f'{x}@{y}') for x, y, _ in [simplify_group(group)[0] for group in self._residuals]]
+        sieves = [
+            Sieve(f'{x}@{y}') for x, y, _ in [
+                simplify_group(group)[0] for group in self._residuals]]
         simple = sieves[0]
         for sieve in sieves[1:]:
             simple = simple | sieve
 
         return simple
 
-    def __or__(self, other) -> 'Sieve':
+    def __str__(self) -> str:
+        """
+        the string representation of this sieve.
         """
 
+        string = []
+
+        for group in self._residuals:
+            string.append(' & '.join([f'{"!" if n else ""}{m}@{s}' for m, s, n in group]))
+
+        return ' | '.join(string)
+
+    def __repr__(self) -> str:
+        return f"Sieve('{str(self)}')"
+
+    def __or__(self, other) -> 'Sieve':
         """
+        returns a complex sieve with union on the other.
+
+        @param other: a string, tuple, or sieve.
+        """
+
+        if not type(other) in [str, tuple, Sieve]:
+            raise ValueError('you can only & str, tuple, and Sieves.')
+
+        if isinstance(other, str):
+            other = Sieve(other)
+
+        if isinstance(other, tuple):
+            other = Sieve(*other)
 
         if isinstance(other, Sieve):
             if other.stype == 'simple':
                 push = [(other._residuals[0][0])]
             elif other.stype == 'compound':
-                push = [(residual[0], residual[1], residual[2]) for residual in other._residuals[0]]
+                push = [(residual[0], residual[1], residual[2])
+                        for residual in other._residuals[0]]
 
             new = Sieve(self)
             new._residuals.append(push)
 
             return new
-
 
     def __and__(self, other) -> 'Sieve':
         """
