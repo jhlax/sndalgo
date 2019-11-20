@@ -12,4 +12,4 @@ submodules
 * xenakis
 
 """
-import xenakis
+import sndalgo.xenakis

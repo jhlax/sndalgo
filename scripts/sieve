@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+
+import click
+
+raise NotImplementedError('still have to make this script!')
