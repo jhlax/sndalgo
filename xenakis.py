@@ -384,7 +384,6 @@ class Sieve:
 
 
 if __name__ == '__main__':
-    __name__ == 'xenakis.py'
     # s = Sieve('4@2 & !1 | 3@2 & 7 & 9@2')
     s = Sieve(1, 7)
     s = s & '3@1' & (7, 3, False)
