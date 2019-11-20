@@ -425,27 +425,3 @@ class Sieve:
 
             return new
 
-
-if __name__ == "__main__":
-    # s = Sieve('4@2 & !1 | 3@2 & 7 & 9@2')
-    s = Sieve(1, 7)
-    s &= (3, 1, False)
-    s &= (7, 3, False)
-    # print(for_iter(s._residuals[0][0], range(128)))
-    s |= (5, 3, False)
-    # simps = simplify_group(s._residuals[0])
-    # print(s.stype, 'sieve', simps)
-
-    print(s.set(range(137)))
-    print(s.bin(range(137)))
-    print(s.delta(range(137)))
-    print(s.unit(range(137)))
-    # print(s)
-
-    # input()
-    # help(__name__)
-    # print(s.stype)
-    # print(s._residuals)
-    # print(s._sieve_type, s._residuals)
-    # print(parse_residual('!5@2'), parse_residual('  5'))  # should be (5, 2, True) (5, 0, False)
-    # print(parse_sieve_str('4@2 & !1 | 3@2 & 7 & 9@2'))
