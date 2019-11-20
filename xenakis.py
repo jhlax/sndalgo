@@ -82,17 +82,17 @@ def parse_sieve_str(res: str) -> list:
 
     if "|" in res:
         for group in res.split("|"):
-            groups += [parse_sieve_str(group)]
+            groups.append(parse_sieve_str(group))
 
         return groups
 
     if "&" in res:
         for residual in res.split("&"):
-            groups += [parse_residual(residual)]
+            groups.append(parse_residual(residual))
 
         return groups
 
-    groups.append([parse_residual(res)])
+    groups.append(parse_residual(res))
 
     return groups
 
@@ -228,6 +228,9 @@ class Sieve:
             raise ValueError(
                 f'the "m" argument is not of types `str`, `int`, or `Sieve`'
             )
+
+        if isinstance(self._residuals[0], tuple):
+            self._residuals = [self._residuals]
 
         for idx, group in enumerate(self._residuals):
             for jdx, residual in enumerate(group):
