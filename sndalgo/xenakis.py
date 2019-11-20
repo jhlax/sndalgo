@@ -1,12 +1,10 @@
-#!/usr/bin/env python3
-
 """
 the iannis xenakis sieve library. or at least just the gist of it.
 
 nov 2019
 
-xenakis.py
-==========
+sndalgo.xenakis
+===============
 
 this should contain a good amount of utilities all packaged into a neat
 little library file. i would like to avoid dependencies. it would be cool
