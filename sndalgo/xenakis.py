@@ -425,4 +425,3 @@ class Sieve:
             new._residuals[-1 if self._cur_group == "last" else self._cur_group] += push
 
             return new
-
