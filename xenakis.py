@@ -148,15 +148,12 @@ def simplify_group(group: list) -> list:
     """
 
     if len(group) == 1:
-        # print(f'len_1: {group}')
-
         return group
 
     if len(group) == 2:
         m = group[0][0] * group[1][0]
         s = min([group[0][1], group[1][1]])
         r = (m, s, False)
-        # print(f'len_2: {m} {s} {r}')
 
         seek = 0
 
@@ -181,7 +178,6 @@ def simplify_group(group: list) -> list:
     while len(group) >= 2:
         end = group[2:]
         simple = simplify_group(group[:2]) + end
-        # print(f"len_3+: {group} {end} {simple}")
         group = simple
 
     return group
