@@ -13,4 +13,10 @@ this system.
 and manipulable with logical operations (i.e. `AND`, `OR`).
 2. sieves have a dual ability to operate as both _CV_ and _signal_
 parameters, depending on how they are used.
-
+3. applications like step sequencers, theory guides, and
+sidechainers are all summated within a single body of knowledge.
+4. algorithmic composition.
+5. synthesis, analysis, and architecture of composition with
+scales, chords, progressions, order, and any other hand in building
+sonic phenomena.
+6. modular design, dimensionless, unitless.
