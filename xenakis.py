@@ -157,12 +157,14 @@ def simplify_group(group: list) -> list:
 
         seek = 0
 
-        while not (
+        while not all(
             in_residual(
                 s,
-                r) == in_residual(
+                r),
+            in_residual(
                 s,
-                group[0]) == in_residual(
+                group[0]),
+            in_residual(
                 s,
                 group[1])) and seek <= m:
             s += 1
