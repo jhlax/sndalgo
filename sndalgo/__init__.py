@@ -10,9 +10,13 @@ submodules
 ----------
 
 * xenakis
+* pitch
+* util
 
 """
 import sndalgo.xenakis
+import sndalgo.pitch
+import sndalgo.util
 
 # shortcuts
 Sieve = sndalgo.xenakis.Sieve
