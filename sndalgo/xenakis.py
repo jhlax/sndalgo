@@ -183,6 +183,12 @@ class Sieve:
     the xenakis sieve, all-in-one class.
     """
 
+    __slots__ = {
+        '_residuals': 'the private residuals list',
+        '_cur_group': 'the current group, "last" by default but is generally an integer'
+                      'denoting the index of the group in _residuals'
+    }
+
     _fmt: str = "set"
 
     def __init__(self, m=1, s=None, n=None, r=None, fmt=None):
@@ -199,6 +205,8 @@ class Sieve:
         @param r: residuals (deprecated/under consideration).
         @param fmt: the default output format.
         """
+
+        self._cur_group = "last"
 
         loaded = False
 
@@ -233,8 +241,6 @@ class Sieve:
         for idx, group in enumerate(self._residuals):
             for jdx, residual in enumerate(group):
                 self._residuals[idx][jdx] = norm_residual(residual)
-
-        self._cur_group = "last"
 
     @property
     def fmt(self) -> str:

@@ -13,3 +13,7 @@ submodules
 
 """
 import sndalgo.xenakis
+
+# shortcuts
+Sieve = sndalgo.xenakis.Sieve
+
