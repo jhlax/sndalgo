@@ -9,6 +9,7 @@ verify_ssl = true
 click = "*"
 numpy = "*"
 numba = "*"
+sympy = "*"
 
 [requires]
 python_version = "3.8"

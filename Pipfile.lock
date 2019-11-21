@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "60dd11c7c484d76fe9fe52159c47ca8b7663a1aad9c902f37450db62dd86a55d"
+            "sha256": "198f40f1627ee34beeefb24b3f0cd3066048451b2c41b6aadc61575996ca12d9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -49,6 +49,13 @@
                 "sha256:dab58e45c0ef5bd47f657fa5ff2e7341846798632517aa319368c998fe994c4e"
             ],
             "version": "==0.30.0"
+        },
+        "mpmath": {
+            "hashes": [
+                "sha256:eb37e163affd96e0d2944dce183d909a53f5c2c6a2263e9de84edbc0605a67ea",
+                "sha256:fc17abe05fbab3382b61a123c398508183406fa132e0223874578e20946499f6"
+            ],
+            "version": "==1.1.0"
         },
         "numba": {
             "hashes": [
@@ -103,6 +110,14 @@
             ],
             "index": "pypi",
             "version": "==1.17.4"
+        },
+        "sympy": {
+            "hashes": [
+                "sha256:71a11e5686ae7ab6cb8feb5bd2651ef4482f8fd43a7c27e645a165e4353b23e1",
+                "sha256:f9b00ec76151c98470e84f1da2d7d03633180b71fb318428ddccce1c867d3eaa"
+            ],
+            "index": "pypi",
+            "version": "==1.4"
         }
     },
     "develop": {}
