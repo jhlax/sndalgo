@@ -1,11 +1,8 @@
 # `sndalgo`<span>&ndash;</span>signal / number stuff for creative use
 
-
 20 nov 2019 | __John Harrington__
 
 ## installation
-
-20 nov 2019 | __John Harrington__
 
 1. clone this repository
 2. install `pipenv`
