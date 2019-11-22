@@ -43,6 +43,18 @@ so what i would do is first:
 
 > as you can see, `~` and `$HOME` are equivalent here. and i did `git clone <this repo>` in my ~/projects folder to create `~/projects/sndalgo`.
 
+### scripts available / usable
+
+#### `sieve`
+
+try using `sieve` in your terminal after closing and reopening it (so the `.bash_profile` refreshes, OR by using `source ~/.bash_profile` in an active terminal).
+
+specifically, try `sieve --help` first to see the shit.
+
+`Z_RANGE` is the arguments for python's `range()` function separated by spaces.
+
+`SIEVE_STR` is essentially a ***double quoted string*** that contains residuals, combined with logic operators. i.e. `-- "-3@2 & 4 | -3@1 & 4@2 | 3 & 4@2"`. notice the `--` before, with a space, which will denote that the `-` symbols in the double-quoted string are not arguments to the CLI program.
+
 ## `xenakis`
 
 our xenakis sieve package. this will be extremely integrated into
