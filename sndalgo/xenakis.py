@@ -28,7 +28,7 @@ computer science concepts like modulus are also good to know.
 """
 
 __author__ = "John Harrington"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 
 def clean_sieve_str(res: str) -> str:
