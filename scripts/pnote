@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+import sndalgo.pitch as pitch
+import click
+
+@click.command()
+@click.argument('notes', type=float, nargs=-1)
+def pnote(notes):
+    if not len(notes):
+        notes = [int(note) for note in input().split()]
+
+    for i in notes:
+        print(pitch.note_str(i))
+
+if __name__ == '__main__':
+    pnote()
