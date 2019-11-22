@@ -10,18 +10,18 @@
 1. clone this repository
 2. install `pipenv`
 
-`pip3 install pipenv`
+   `pip3 install pipenv`
 3. enter and set up environment
 
-`cd sndalgo`
+   `cd sndalgo`
 
-`pipenv install`
+   `pipenv install`
 4. enter the environment shell
 
-`pipenv shell`
+   `pipenv shell`
 5. write code!
 
-`vim fuck.py`
+   `vim fuck.py`
 
 ## scripts and preparing the module
 
