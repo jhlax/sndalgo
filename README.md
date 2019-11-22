@@ -1,26 +1,47 @@
 # `sndalgo`<span>&ndash;</span>signal / number stuff for creative use
 
 
+20 nov 2019 | __John Harrington__
+
 ## installation
+
+20 nov 2019 | __John Harrington__
 
 1. clone this repository
 2. install `pipenv`
 
-   `pip3 install pipenv`
+`pip3 install pipenv`
 3. enter and set up environment
 
-   `cd sndalgo`
+`cd sndalgo`
 
-   `pipenv install`
+`pipenv install`
 4. enter the environment shell
 
-   `pipenv shell`
+`pipenv shell`
 5. write code!
 
-   `vim fuck.py`
+`vim fuck.py`
 
+## scripts and preparing the module
 
-20 nov 2019 | __John Harrington__
+so, this repo has not been set up to be a package that can be installed thru `pip`, *but*
+it can be emulated with this... at least NOT on windows ;)
+
+which means this is for **mac** and linux (either through .profile or not) only
+
+so what i would do is first:
+
+1. figure out the clone path. for me its `~/projects/sndalgo`.
+2. add that to your `PYTHONPATH` with this command:
+
+   `echo "export PYTHONPATH=$PYTHONPATH:~/projects/sndalgo" >> ~/.bash_profile`
+
+3. then add the scripts folder for that clone path (`$HOME/projects/sndalgo/scripts` for me) to your `PATH`:
+
+   `echo "export PATH=$PATH:$HOME/projects/sndalgo/scripts" >> ~/.bash_profile`
+
+> as you can see, `~` and `$HOME` are equivalent here. and i did `git clone <this repo>` in my ~/projects folder to create `~/projects/sndalgo`.
 
 ## `xenakis`
 
