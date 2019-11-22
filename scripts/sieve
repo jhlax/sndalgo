@@ -8,7 +8,8 @@ import sndalgo
 @click.argument('z_range', nargs=-1, type=int)
 @click.option('--sep', '-s', type=str, help='the separator for the output', default='\n')
 @click.option('--simple', '-S', is_flag=True, default=False, help='use or output the simplified sieve')
-def sieve(sieve_str, z_range, sep, simple):
+@click.option('--fmt', '-f', type=click.Choice(['set', 'unit', 'delta', 'bin'], case_sensitive=False), default='set')
+def sieve(sieve_str, z_range, sep, simple, fmt):
     s = sndalgo.Sieve(sieve_str)
     out_str = 'sieve:'
 
@@ -23,7 +24,9 @@ def sieve(sieve_str, z_range, sep, simple):
         print(s.stype, out_str, s)
         exit(0)
 
-    r = s.set(z)
+    fmt = fmt.lower()
+
+    r = getattr(s, fmt)(z)
     
     print(*r, sep=sep)
 
