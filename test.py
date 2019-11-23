@@ -34,9 +34,11 @@
 
 # print(testval, 'flattened:', flatten(testval))
 
+import numpy as np
+
 from sndalgo.waves import sine
 from sndalgo.pitch import ntof
 
-waveform = map(lambda t: sine(2, t), range(48000))
+waveform = sine(1, np.arange(48000))
 
 print(*waveform, sep="\n")
