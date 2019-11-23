@@ -13,6 +13,8 @@ sympy = "*"
 colorama = "*"
 scipy = "*"
 matplotlib = "*"
+mido = "*"
+py-midi = "*"
 
 [requires]
 python_version = "3.8"
