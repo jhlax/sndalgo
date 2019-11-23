@@ -42,6 +42,14 @@ so what i would do is first:
 
 ### scripts available / usable
 
+there are a few scripts available:
+
+1. `sieve`
+2. `pnote`
+3. `modulus`
+
+and when using them together with pipes, i recommend (because it works) to use the `-s ' '` flag at the beginning, which outputs them as *space-delimited* integers.
+
 #### `sieve`
 
 try using `sieve` in your terminal after closing and reopening it (so the `.bash_profile` refreshes, OR by using `source ~/.bash_profile` in an active terminal).
@@ -51,6 +59,59 @@ specifically, try `sieve --help` first to see the shit.
 `Z_RANGE` is the arguments for python's `range()` function separated by spaces.
 
 `SIEVE_STR` is essentially a ***double quoted string*** that contains residuals, combined with logic operators. i.e. `-- "-3@2 & 4 | -3@1 & 4@2 | 3 & 4@2"`. notice the `--` before, with a space, which will denote that the `-` symbols in the double-quoted string are not arguments to the CLI program.
+
+#### `pnote`
+
+`pnote` outputs a number as it's human-readable key/octave/cents form...
+
+i.e.
+
+```
+pnote -s ' ' 0 1 2
+```
+
+will result in
+
+```
+C-1 C#/Db-1 D-1
+```
+
+or an easy one is
+
+```
+pnote -s ' ' 69 82
+```
+
+```
+A4 A5
+```
+
+#### `modulus`
+
+modulus takes, again, another space delimited string of integers and outputs them at modulus 12
+(with option `-m MODULUS` to change that)
+
+```
+modulus -s ' ' 13 14 15 16
+```
+
+to
+
+```
+1 2 3 4
+```
+
+or
+
+```
+modulus -m 7 -s ' ' 13 14 15 16
+```
+
+to
+
+```
+6 0 1 2
+```
 
 ## `xenakis`
 
