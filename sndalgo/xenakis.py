@@ -410,6 +410,7 @@ class Sieve:
         if isinstance(other, Sieve):
             if other.stype == "simple":
                 push = [(other._residuals[0][0])]
+
             elif other.stype == "compound":
                 push = [
                     (residual[0], residual[1], residual[2])
@@ -443,6 +444,7 @@ class Sieve:
         if isinstance(other, Sieve):
             if other.stype == "simple":
                 push = [(other._residuals[0][0])]
+
             elif other.stype == "compound":
                 push = [
                     (residual[0], residual[1], residual[2])

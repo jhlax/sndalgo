@@ -15,4 +15,3 @@
 import sndalgo.pitch as sa
 
 print("62:", sa.note_str(62))
-
