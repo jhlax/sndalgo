@@ -134,6 +134,9 @@ def norm_residual(res: tuple) -> tuple:
     @returns normalized residual
     """
 
+    if len(res) == 2:
+        res = (res[0], res[1], False)
+
     return (res[0], res[1] % res[0], res[2])
 
 
@@ -166,7 +169,7 @@ def simplify_group(group: list) -> list:
             seek += 1
 
         if seek == m:
-            raise ValueError("this combination of residuals have no true values.")
+            raise ValueError("this combination of residuals has no true values.")
 
         return [r]
 
@@ -186,10 +189,11 @@ class Sieve:
     __slots__ = {
         '_residuals': 'the private residuals list',
         '_cur_group': 'the current group, "last" by default but is generally an integer'
-                      'denoting the index of the group in _residuals'
+                      ' denoting the index of the group in _residuals'
     }
 
     _fmt: str = "set"
+    _transpose: int = 0
 
     def __init__(self, m=1, s=None, n=None, r=None, fmt=None):
         """
@@ -221,6 +225,13 @@ class Sieve:
             loaded = True
 
         if isinstance(m, int):
+            if m == 0:
+                m = 1
+
+            if m < 0:
+                m *= -1
+                n = True
+
             self._residuals = [[(m, s or 0, n or False)]]
 
             loaded = True
@@ -316,6 +327,7 @@ class Sieve:
         for group in self._residuals:
             res_g = [for_iter(residual, z) for residual in group]
             res_g = [v for v in z if all(v in r for r in res_g)]
+
             res.append(res_g)
 
         res = [v for v in z if any(v in g for g in res)]
@@ -347,6 +359,16 @@ class Sieve:
         div = len(z) - 1
 
         return list(v / div for v in set_)
+
+    def __call__(self, z: list) -> list:
+        """
+        this will get whichever format this sieve is set to and will call its
+        function for the z input.
+
+        @returns the resultant list of values from the function
+        """
+
+        return getattr(self, self._fmt)(z)
 
     def __str__(self) -> str:
         """
@@ -431,3 +453,8 @@ class Sieve:
             new._residuals[-1 if self._cur_group == "last" else self._cur_group] += push
 
             return new
+
+    def __add__(self, other) -> 'Sieve':
+        self.transpose += other
+        return self
+
