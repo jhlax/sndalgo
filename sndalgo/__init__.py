@@ -21,6 +21,7 @@ __author__ = "John Harrington"
 import sndalgo.xenakis
 import sndalgo.pitch
 import sndalgo.util
+import sndalgo.waves
 
 # shortcuts
 # from xenakis

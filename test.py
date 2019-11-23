@@ -16,19 +16,27 @@
 
 # print("62:", sa.note_str(62))
 
-def flatten(val) -> list:
-    flat = []
+# def flatten(val) -> list:
+#     flat = []
 
-    if any(isinstance(val, _) for _ in [list, tuple, set]):
-        for v in val:
-            flat.extend(flatten(v))
+#     if any(isinstance(val, _) for _ in [list, tuple, set]):
+#         for v in val:
+#             flat.extend(flatten(v))
 
-    else:
-        flat.append(val)
+#     else:
+#         flat.append(val)
 
-    return flat
+#     return flat
 
-testval = [[3, [2]], [[[[5]]]]]
+# from sndalgo.util import flatten
 
-print(testval, 'flattened:', flatten(testval))
+# testval = [[3, [2]], [[[[5]]]]]
 
+# print(testval, 'flattened:', flatten(testval))
+
+from sndalgo.waves import sine
+from sndalgo.pitch import ntof
+
+waveform = map(lambda t: sine(2, t), range(48000))
+
+print(*waveform, sep='\n')

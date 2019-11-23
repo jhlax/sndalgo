@@ -11,6 +11,6 @@
 
 # sndalgo.pitch
 
-1. create pitch converters
+1. ~~create pitch converters~~
 2. research athenaCL's pitchUtils
 

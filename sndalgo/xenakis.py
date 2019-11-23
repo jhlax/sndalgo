@@ -142,7 +142,6 @@ def norm_residual(res: tuple) -> tuple:
     return (res[0], res[1] % res[0], res[2])
 
 
-@njit
 def simplify_group(group: list) -> list:
     """
     simplifies a group--which are all &--into a single residual.
