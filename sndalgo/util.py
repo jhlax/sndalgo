@@ -4,6 +4,7 @@ util.py / utility functions
 
 import numba as nb
 
+
 def flatten(val) -> list:
     flat = []
 

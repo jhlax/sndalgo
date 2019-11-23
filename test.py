@@ -39,4 +39,4 @@ from sndalgo.pitch import ntof
 
 waveform = map(lambda t: sine(2, t), range(48000))
 
-print(*waveform, sep='\n')
+print(*waveform, sep="\n")

@@ -44,6 +44,7 @@ def clean_sieve_str(res: str) -> str:
     res = "".join(_ for _ in res.strip() if _ != " " and _ != "\n")
     return res
 
+
 def parse_residual(res: str) -> tuple:
     """
     parses a residual--the subunit of a sieve.
@@ -66,6 +67,7 @@ def parse_residual(res: str) -> tuple:
         modulus, shift = int(res), 0
 
     return (modulus, shift, neg)
+
 
 def parse_sieve_str(res: str) -> list:
     """
