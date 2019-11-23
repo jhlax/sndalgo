@@ -17,8 +17,9 @@ compiled.
 import numpy as np
 import numba as nb
 
-TUNING_FREQUENCY = 440.
-KEYS = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B']
+TUNING_FREQUENCY = 440.0
+KEYS = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"]
+
 
 @nb.njit
 def ntof(note: int) -> float:
@@ -28,6 +29,7 @@ def ntof(note: int) -> float:
 
     return TUNING_FREQUENCY * 2 ** ((note - 69) / 12)
 
+
 @nb.njit
 def fton(freq: float) -> float:
     """
@@ -36,6 +38,7 @@ def fton(freq: float) -> float:
     """
 
     return 69 + 12 * np.log2(freq / TUNING_FREQUENCY)
+
 
 def nokc(note: float) -> tuple:
     """
@@ -47,6 +50,7 @@ def nokc(note: float) -> tuple:
     cents = (note - int(note)) * 100
 
     return (octave, key, cents)
+
 
 def note_str(note: float) -> str:
     """

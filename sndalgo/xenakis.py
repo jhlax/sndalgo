@@ -187,9 +187,9 @@ class Sieve:
     """
 
     __slots__ = {
-        '_residuals': 'the private residuals list',
-        '_cur_group': 'the current group, "last" by default but is generally an integer'
-                      ' denoting the index of the group in _residuals'
+        "_residuals": "the private residuals list",
+        "_cur_group": 'the current group, "last" by default but is generally an integer'
+        " denoting the index of the group in _residuals",
     }
 
     _fmt: str = "set"
@@ -454,7 +454,6 @@ class Sieve:
 
             return new
 
-    def __add__(self, other) -> 'Sieve':
+    def __add__(self, other) -> "Sieve":
         self.transpose += other
         return self
-

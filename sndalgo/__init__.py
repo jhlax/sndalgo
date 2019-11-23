@@ -15,8 +15,8 @@ submodules
 
 """
 
-__version__ = '0.0.2'
-__author__ = 'John Harrington'
+__version__ = "0.0.2"
+__author__ = "John Harrington"
 
 import sndalgo.xenakis
 import sndalgo.pitch
@@ -28,4 +28,3 @@ from sndalgo.xenakis import Sieve
 
 # from pitch
 from sndalgo.pitch import ntof, fton, note_str, KEYS, TUNING_FREQUENCY
-
