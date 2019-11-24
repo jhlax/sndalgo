@@ -36,9 +36,11 @@
 
 import numpy as np
 
-from sndalgo.waves import sine
+from sndalgo.waves import sine, lookup_oscil
 from sndalgo.pitch import ntof
 
-waveform = sine(1, np.arange(48000))
+waveform = sine(1, np.arange(4092), 4092)
+
+waveform = lookup_oscil(4, np.arange(48000), waveform, 48000)
 
 print(*waveform, sep="\n")
