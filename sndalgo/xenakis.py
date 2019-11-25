@@ -461,5 +461,10 @@ class Sieve:
             return new
 
     def __add__(self, other) -> "Sieve":
+        """
+        adds to the transposition
+        """
+
         self.transpose += other
         return self
+
