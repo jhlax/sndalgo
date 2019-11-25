@@ -467,4 +467,3 @@ class Sieve:
 
         self.transpose += other
         return self
-

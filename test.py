@@ -48,7 +48,7 @@ import numpy as np
 
 from sndalgo.waves import additive, lookup_oscil
 
-bsize = 8196
+bsize = 48000
 
 z = np.arange(bsize)
 f = 1
@@ -60,4 +60,4 @@ y = additive(h, z, s, True)
 
 y = lookup_oscil(3, np.arange(48000), y, 48000)
 
-print(*y, sep='\n')
+print(*y, sep="\n")

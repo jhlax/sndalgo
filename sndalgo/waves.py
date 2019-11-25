@@ -58,4 +58,3 @@ def additive(bins, t, srate=SAMPLING_RATE, normalize=True):
         out = out / np.max(out)
 
     return out
-
