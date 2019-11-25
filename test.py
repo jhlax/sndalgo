@@ -46,18 +46,25 @@
 
 import numpy as np
 
-from sndalgo.waves import additive, lookup_oscil
+from sndalgo.waves import additive, lookup_oscil, total_amp, square, lookup_oscil
 
-bsize = 48000
+# bsize = 48000
 
-z = np.arange(bsize)
-f = 1
-s = bsize
+# z = np.arange(bsize)
+# f = 1
+# s = bsize
 
-h = np.asarray([1.0, 0.8, 0.6, 0, 0.5, 0, 0.4], dtype=float)
+# h = np.asarray([1.0, 0.8, 0.6, 0, 0.5, 0, 0.4], dtype=float)
 
-y = additive(h, z, s, True)
+# y = additive(h, z, s, True)
 
-y = lookup_oscil(3, np.arange(48000), y, 48000)
+# y = lookup_oscil(3, np.arange(48000), y, 48000)
 
-print(*y, sep="\n")
+# print(*y, sep="\n")
+
+# print(total_amp(4))
+
+# for v in lookup_oscil(2, z, wave, 48000):
+#     print(v)
+
+# print(additive([1, 0, 1, 0], 8192, 8192))
