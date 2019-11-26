@@ -54,6 +54,6 @@ def additive(bins, t, srate=SAMPLING_RATE, normalize=True):
         out.append(phs)
 
     if normalize:
-        out = out / np.max(out)
+        out = out / np.max(np.abs(out))
 
     return out
