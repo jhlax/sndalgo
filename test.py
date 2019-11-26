@@ -47,6 +47,7 @@
 import numpy as np
 
 from sndalgo.waves import additive, lookup_oscil
+
 # bsize = 48000
 
 # z = np.arange(bsize)
@@ -71,4 +72,3 @@ from sndalgo.waves import additive, lookup_oscil
 wt = additive([0.28, 0.31, 0.7, 0.19, 0.18, 0.1], np.arange(8192), 8192)
 
 _ = [print(x) for x in lookup_oscil(2, np.arange(44200), wt, 44200)]
-
