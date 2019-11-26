@@ -174,3 +174,33 @@ this should have both real-time and hard-bodied MIDI utilities.
 
 
 
+# notes
+
+alright. it seems like we want to have a dynamically allocated input of values in a sequence for nearly all of our functions.
+
+this sequence can be a sieve's resolution or translated midi, etc. etc.
+
+there is the `sample rate`, the `separator`, `frequency`, `block size`, `harmonics`...
+
+* `modulus`
+* `notes`
+* `z range`
+* `sieve`
+* `output format`
+
+so we have a quick few things to relate properly, and study for compilability and interoperability.
+
+a good aim is to create a simple eco system of files and types to be commandable with one `click` command script (although with multiple features etc. etc.)
+
+we need utilities like:
+
+* the multiple formats for sieves should be implemented
+* files **AND** stdin streams for pipes
+* bash and python scriptable and with a common api
+* reverse, shrink, expand, etc. for sequencing
+* operations
+* filetypes that are standardized
+* more cowbell
+
+over time, this will be a huge tool for synthesis and processing of sound. hopefully.
+
