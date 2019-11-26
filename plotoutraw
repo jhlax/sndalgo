@@ -1,0 +1,4 @@
+set term dumb size 130, 30
+set output "plot"
+plot "out.raw"
+exit
