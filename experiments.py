@@ -8,7 +8,7 @@ import toolz as tlz
 import sndalgo as S
 
 
-def print_sig(dat, title='data', width=130, height=30, base=0):
+def print_sig(dat, title="data", width=130, height=30, base=0):
     fig = tpl.figure()
     datlen = len(dat)
     datx = np.arange(0 + base, base + datlen - 1)
@@ -68,4 +68,3 @@ print_sig(sig)
 sig = ring(sig, mod1)
 
 print_sig(sig)
-
