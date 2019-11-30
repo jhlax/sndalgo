@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+import click
+
+import sndalgo.waves as waves
+
+

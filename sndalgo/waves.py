@@ -26,6 +26,19 @@ def square_digital(freq, t, srate=SAMPLING_RATE) -> np.ndarray:
 
 
 @nb.njit
+def square_harms(nharms) -> np.ndarray:
+    out = np.zeros(nharms * 2)
+
+    for idx, harm in enumerate(range(1, 2 * nharms, 2)):
+        out[idx * 2] = (4 / (harm * np.pi))
+
+    mx = np.max(np.abs(out))
+    out = out / mx
+
+    return out
+
+
+@nb.njit
 def square_analog(freq, t, nharms, srate=SAMPLING_RATE) -> np.ndarray:
     """
     outputs an analog calculation of a square wave dependent on the number
@@ -40,8 +53,10 @@ def square_analog(freq, t, nharms, srate=SAMPLING_RATE) -> np.ndarray:
 
     out = np.zeros(srate)
 
-    for harm in range(1, nharms + 1, 2):
-        out += (4 / (harm * np.pi)) * np.sin(2 * np.pi * harm * freq * t)
+    for harm in range(1, 2 * nharms, 2):
+        # out += (4 / (harm * np.pi)) * np.sin(2 * np.pi * harm * freq * t)
+        # out += (4 / (harm * np.pi)) * np.sin(2 * np.pi * harm * freq * t)
+        out += -(4 / (harm * np.pi)) * np.sin(np.pi * harm * freq * t)
 
     mx = np.max(np.abs(out))
     out /= mx
