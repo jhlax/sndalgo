@@ -47,24 +47,32 @@
 import numpy as np
 import termplotlib as tpl
 
-from sndalgo.waves import additive, lookup_oscil
+from sndalgo.waves import additive, lookup_oscil, square_digital, square_analog
+from sndalgo.util import softmax
 
 bsize = 8192
 
 z = np.arange(bsize)
 f = 1
-s = bsize
 
 h = np.asarray([1.0, 1.0, 1.0], dtype=float)
 
-y = additive(h, z, s, True)
-
-y = lookup_oscil(3, np.arange(48000), y, 48000)
+S = np.arange(48000)
+# y = additive(h, z, s, True)
+# y = lookup_oscil(3, x, y, 48000)
+x = np.arange(bsize)
+y = square_analog(1, z, 16, bsize)
+y = lookup_oscil(2, S, y, len(S))
 
 fig = tpl.figure()
 
-fig.plot(np.arange(48000), y, label='additive', width=130, height=30)
+x = np.arange(len(y))
+
+fig.plot(x, y, label='additive', width=130, height=30)
+
 fig.show()
+
+print(np.max(y))
 
 # print(*y, sep="\n")
 
@@ -78,3 +86,5 @@ fig.show()
 # wt = additive([0.28, 0.31, 0.7, 0.19, 0.18, 0.1], np.arange(8192), 8192)
 
 # _ = [print(x) for x in lookup_oscil(2, np.arange(44200), wt, 44200)]
+
+print('\a')

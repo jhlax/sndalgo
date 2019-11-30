@@ -1,5 +1,6 @@
 import numpy as np
 import numba as nb
+from scipy import signal
 
 SAMPLING_RATE = 48000
 TWO_PI = np.pi * 2.0
@@ -12,6 +13,40 @@ def sine(freq, t, srate=SAMPLING_RATE) -> np.ndarray:
     """
 
     return np.sin(TWO_PI * freq * t / srate)
+
+
+@nb.njit
+def square_digital(freq, t, srate=SAMPLING_RATE) -> np.ndarray:
+    """
+    generates a digitally (ideal) square wave using a sine wave and
+    signedness
+    """
+
+    return np.sign(sine(freq, t, srate))
+
+
+@nb.njit
+def square_analog(freq, t, nharms, srate=SAMPLING_RATE) -> np.ndarray:
+    """
+    outputs an analog calculation of a square wave dependent on the number
+    of harmonics desired
+
+    this outputs a 1:2 Hz square wave, which is the only real way to replicate
+    an analog square as it seems
+    """
+
+    t_ = t
+    t = np.linspace(-1., 1., srate)
+
+    out = np.zeros(srate)
+
+    for harm in range(1, nharms + 1, 2):
+        out += (4 / (harm * np.pi)) * np.sin(2 * np.pi * harm * freq * t)
+
+    mx = np.max(np.abs(out))
+    out /= mx
+
+    return out
 
 
 @nb.njit
