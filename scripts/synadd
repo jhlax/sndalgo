@@ -15,12 +15,14 @@ def synadd(harmonics, block_size, freq, soft):
     harms = np.asarray(harmonics, dtype=float)
     
     if len(harms) >= 1:
-        harms = U.softmax(np.asarray(harms, dtype=float))
+        if soft:
+            harms = U.softmax(np.asarray(harms, dtype=float))
         wt = W.additive(harms, np.arange(block_size), block_size)
 
     else:
         harms = np.asarray([float(_) for _ in input().split()], dtype=float)
-        harms = U.softmax(np.asarray(harms, dtype=float))
+        if soft:
+            harms = U.softmax(np.asarray(harms, dtype=float))
         wt = W.additive(harms, np.arange(block_size), block_size)
 
 
