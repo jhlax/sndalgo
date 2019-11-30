@@ -32,9 +32,14 @@ def mix(*sigs):
 
     return out
 
+
 def ring(dat, mod):
     out = dat * mod
     return out
+
+
+def rectify(dat):
+    return np.abs(dat)
 
 
 bsize = 8192
@@ -53,6 +58,7 @@ sig2 = S.waves.lookup_oscil(f ** 3, t, wt, s)
 
 mod1 = S.waves.sine(1, block, bsize)
 mod1 = S.waves.lookup_oscil(2, t, mod1, s)
+mod1 = rectify(mod1)
 
 sig = mix(sig, sig2)
 sig = normalize(sig)
