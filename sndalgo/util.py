@@ -2,6 +2,7 @@
 util.py / utility functions
 """
 
+import numpy as np
 import numba as nb
 
 
@@ -16,3 +17,12 @@ def flatten(val) -> list:
         flat.append(val)
 
     return flat
+
+
+@nb.njit
+def softmax(tab):
+    z = np.exp(np.abs(tab))
+    m = np.max(np.abs(z))
+    out = z / m
+
+    return out

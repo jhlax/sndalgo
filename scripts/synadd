@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sndalgo.waves as W
+import sndalgo.util as U
 
 import click
 import numpy as np
@@ -9,16 +10,21 @@ import numpy as np
 @click.argument('harmonics', nargs=-1, type=float)
 @click.argument('block_size', type=int)
 @click.option('-f', '--freq', type=float, help='the period of a full cycle of the wave', default=1.)
-def synadd(harmonics, block_size, freq):
-    harms = list(harmonics)
-
-    if len(harms):
+@click.option('-S', 'soft', is_flag=True, default=False, type=bool, help='perform a softmax function on the input harms')
+def synadd(harmonics, block_size, freq, soft):
+    harms = np.asarray(harmonics, dtype=float)
+    
+    if len(harms) >= 1:
+        harms = U.softmax(np.asarray(harms, dtype=float))
         wt = W.additive(harms, np.arange(block_size), block_size)
 
-        [print(x) for x in W.lookup_oscil(freq, np.arange(block_size), wt, block_size)]
-
     else:
-        print('ehh.. try again')
+        harms = np.asarray([float(_) for _ in input().split()], dtype=float)
+        harms = U.softmax(np.asarray(harms, dtype=float))
+        wt = W.additive(harms, np.arange(block_size), block_size)
+
+
+    [print(x) for x in W.lookup_oscil(freq, np.arange(block_size), wt, block_size)]
 
 
 if __name__ == '__main__':
