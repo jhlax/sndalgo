@@ -17,6 +17,7 @@ mido = "*"
 py-midi = "*"
 termplotlib = "*"
 termtables = "*"
+python-rtmidi = "*"
 
 [requires]
 python_version = "3.8"
