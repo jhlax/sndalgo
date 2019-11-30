@@ -45,20 +45,26 @@
 # print(*waveform, sep="\n")
 
 import numpy as np
+import termplotlib as tpl
 
 from sndalgo.waves import additive, lookup_oscil
 
-# bsize = 48000
+bsize = 8192
 
-# z = np.arange(bsize)
-# f = 1
-# s = bsize
+z = np.arange(bsize)
+f = 1
+s = bsize
 
-# h = np.asarray([1.0, 0.8, 0.6, 0, 0.5, 0, 0.4], dtype=float)
+h = np.asarray([1.0, 1.0, 1.0], dtype=float)
 
-# y = additive(h, z, s, True)
+y = additive(h, z, s, True)
 
-# y = lookup_oscil(3, np.arange(48000), y, 48000)
+y = lookup_oscil(3, np.arange(48000), y, 48000)
+
+fig = tpl.figure()
+
+fig.plot(np.arange(48000), y, label='additive', width=130, height=30)
+fig.show()
 
 # print(*y, sep="\n")
 
