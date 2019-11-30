@@ -47,7 +47,13 @@
 import numpy as np
 import termplotlib as tpl
 
-from sndalgo.waves import additive, lookup_oscil, square_digital, square_analog, square_harms
+from sndalgo.waves import (
+    additive,
+    lookup_oscil,
+    square_digital,
+    square_analog,
+    square_harms,
+)
 from sndalgo.util import softmax
 
 bsize = 8192
@@ -89,4 +95,4 @@ print(square_harms(16))
 
 # _ = [print(x) for x in lookup_oscil(2, np.arange(44200), wt, 44200)]
 
-print('\a')
+print("\a")

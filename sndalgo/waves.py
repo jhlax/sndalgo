@@ -30,7 +30,7 @@ def square_harms(nharms) -> np.ndarray:
     out = np.zeros(nharms * 2)
 
     for idx, harm in enumerate(range(1, 2 * nharms, 2)):
-        out[idx * 2] = (4 / (harm * np.pi))
+        out[idx * 2] = 4 / (harm * np.pi)
 
     mx = np.max(np.abs(out))
     out = out / mx
@@ -49,7 +49,7 @@ def square_analog(freq, t, nharms, srate=SAMPLING_RATE) -> np.ndarray:
     """
 
     t_ = t
-    t = np.linspace(-1., 1., srate)
+    t = np.linspace(-1.0, 1.0, srate)
 
     out = np.zeros(srate)
 

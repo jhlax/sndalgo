@@ -1,7 +1,53 @@
 #!/usr/bin/env python3
 
 import click
+import numpy as np
 
 import sndalgo.waves as waves
 
+BSIZE, SRATE, NHARMS = 8192, 48000, 32
 
+@click.command()
+@click.option('--waveform', '-W', type=click.Choice(['sine', 'square', 'harms'], case_sensitive=False), default='sine')
+@click.option('--bsize', '-B', type=int, default=BSIZE)
+@click.option('--nharms', '-H', type=int, default=NHARMS)
+@click.option('--srate', '-S', type=int, default=SRATE)
+@click.option('--time', '-T', type=float, default=1.)
+@click.option('--freq', '-F', type=float, default=1.)
+@click.option('-D', '--digital', is_flag=True, default=False)
+@click.argument('harms', nargs=-1)
+def wavgen(waveform, bsize, nharms, srate, time, freq, digital, harms):
+    if len(harms):
+        waveform = 'harms'
+
+    waveform = waveform.lower()
+
+    t = np.arange(int(time * srate))
+    bs = np.arange(bsize)
+    
+    if waveform == 'sine':
+        wtable = waves.sine(1, bs, bsize)
+
+    if waveform == 'square':
+        if digital:
+            wtable = waves.square_digital(1, bs, bsize)
+
+        else:
+            wtable = waves.square_analog(1, bs, nharms, bsize)
+
+    if waveform == 'harms':
+        if len(harms):
+            harms = [float(harm) for harm in harms]
+        else:
+            print('no harmonics given, default to 1.0 (sine)')
+            harms = [1.]
+
+        wtable = waves.additive(harms, bs, srate)
+
+    out = waves.lookup_oscil(freq, t, wtable, srate)
+
+    print(*out, sep='\n')
+
+
+if __name__ == '__main__':
+    wavgen()
