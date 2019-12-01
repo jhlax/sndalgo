@@ -107,3 +107,37 @@ def additive(bins, t, srate=SAMPLING_RATE, normalize=True):
         out = out / np.max(np.abs(out))
 
     return out
+
+
+def waveform(name, *harms, bins=64, bsize=8192, norm=True, algo="analog", period=1.0):
+    block = np.arange(bsize)
+    name = name.strip().lower()
+
+    if name == "sine" and algo == "analog":
+        out = sine(period, block, bsize)
+        return out
+
+    algo = algo.strip().lower()
+
+    if name == "square" and algo == "analog":
+        out = square_analog(period, block, bins, bsize)  # TODO: add normalization
+        return out
+
+    if name == "square" and algo == "digital":
+        out = square_digital(period, block, bsize)
+        return out
+
+    if name == "harms":
+        out = additive(harms, block, bsize, norm)
+        return out
+
+    return Exception("not a valid input type")
+
+
+def lookup(wform, srate=48000, trunc=True):
+    if trunc:
+
+        def lookup_(freq, t):
+            return lookup_oscil(freq, t, wform, srate)
+
+        return lookup_
