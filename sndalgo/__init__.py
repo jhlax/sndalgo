@@ -22,6 +22,7 @@ import sndalgo.xenakis
 import sndalgo.pitch
 import sndalgo.util
 import sndalgo.waves
+import sndalgo.dsp
 
 # shortcuts
 # from xenakis
