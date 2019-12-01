@@ -24,9 +24,11 @@ f = 2  # frequency
 s = 48000  # sampling rate
 t = np.arange(s)
 
-wform = waveform("square")
+wform = waveform("harms", 1.0, 0., 0.222, 0., 0., 0.090909)
+oscil = lookup(wform)
+out = oscil(3, np.arange(48000))
 
-print_sig(wform)
+print_sig(out)
 
 
 # sig = S.waves.lookup_oscil(f, t, wt, s)
