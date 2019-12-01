@@ -142,3 +142,7 @@ def lookup(wform, srate=48000, trunc=True):
             return lookup_oscil(freq, t, wform, srate)
 
         return lookup_
+		
+	else:
+	
+		raise NotImplemented('linear interpolation oscillator has not been implemented yet')
