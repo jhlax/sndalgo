@@ -6,40 +6,8 @@ import termplotlib as tpl
 import UliEngineering as ue
 import toolz as tlz
 import sndalgo as S
-
-
-def print_sig(dat, title="data", width=130, height=30, base=0):
-    fig = tpl.figure()
-    datlen = len(dat)
-    datx = np.arange(0 + base, base + datlen - 1)
-
-    fig.plot(datx, dat, title=title, width=width, height=height)
-    fig.show()
-
-    return dat
-
-
-def normalize(dat):
-    max_ = np.max(np.abs(dat))
-    return dat / max_
-
-
-def mix(*sigs):
-    out = np.zeros(len(sigs[0]))
-
-    for sig in sigs:
-        out += sig
-
-    return out
-
-
-def ring(dat, mod):
-    out = dat * mod
-    return out
-
-
-def rectify(dat):
-    return np.abs(dat)
+from sndalgo.util import print_sig
+from sndalgo.dsp import *
 
 
 bsize = 8192

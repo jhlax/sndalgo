@@ -22,5 +22,3 @@ def ring(dat, mod):
 
 def rectify(dat):
     return np.abs(dat)
-
-
