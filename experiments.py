@@ -16,10 +16,6 @@ from sndalgo.xenakis import *
 bsize = 8192
 block = np.arange(bsize)
 
-wt = S.waves.square_analog(1, block, 16, bsize)  # square wavetable
-
-# print_sig(wt)  # show the wavetable
-
 f = 2  # frequency
 s = 48000  # sampling rate
 t = np.arange(s)
@@ -31,12 +27,11 @@ out = oscil(2, t)
 mod = waveform("sine")
 mod = lookup(mod)
 mod = mod(4, t)
-mod = rectify(mod)
+# mod = rectify(mod)
 
 out = ring(out, mod)
 
 print_sig(out)
-
 
 # sig = S.waves.lookup_oscil(f, t, wt, s)
 # sig2 = S.waves.lookup_oscil(f ** 3, t, wt, s)
