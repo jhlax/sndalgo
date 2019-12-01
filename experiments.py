@@ -26,7 +26,14 @@ t = np.arange(s)
 
 wform = waveform("harms", 1.0, 0., 0.222, 0., 0., 0.090909)
 oscil = lookup(wform)
-out = oscil(3, np.arange(48000))
+out = oscil(2, t)
+
+mod = waveform("sine")
+mod = lookup(mod)
+mod = mod(4, t)
+mod = rectify(mod)
+
+out = ring(out, mod)
 
 print_sig(out)
 

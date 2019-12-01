@@ -131,7 +131,8 @@ def waveform(name, *harms, bins=64, bsize=8192, norm=True, algo="analog", period
         out = additive(harms, block, bsize, norm)
         return out
 
-    return Exception("not a valid input type")
+    print("not a valid input type")
+    exit(1)
 
 
 def lookup(wform, srate=48000, trunc=True):
