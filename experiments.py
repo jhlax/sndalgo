@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-# test!
-
 import numpy as np
 import scipy as sp
 import termplotlib as tpl
@@ -18,7 +16,7 @@ from sndalgo.xenakis import *
 bsize = 8192
 block = np.arange(bsize)
 
-wt = S.waves.square_analog(1, block, 16, bsize)  # square wavetable
+# wt = S.waves.square_analog(1, block, 16, bsize)  # square wavetable
 
 # print_sig(wt)  # show the wavetable
 
