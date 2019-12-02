@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-# test!
-
 import numpy as np
 import scipy as sp
 import termplotlib as tpl
@@ -18,11 +16,15 @@ from sndalgo.xenakis import *
 bsize = 8192
 block = np.arange(bsize)
 
+# wt = S.waves.square_analog(1, block, 16, bsize)  # square wavetable
+
+# print_sig(wt)  # show the wavetable
+
 f = 2  # frequency
 s = 48000  # sampling rate
 t = np.arange(s)
 
-wform = waveform("harms", 1.0, 0., 0.222, 0., 0., 0.090909)
+wform = waveform("harms", 1.0, 0.0, 0.222, 0.0, 0.0, 0.090909)
 oscil = lookup(wform)
 out = oscil(2, t)
 
