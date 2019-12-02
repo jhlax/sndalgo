@@ -10,8 +10,9 @@ import numpy as np
 @click.argument('harmonics', nargs=-1, type=float)
 @click.argument('block_size', type=int)
 @click.option('-f', '--freq', type=float, help='the period of a full cycle of the wave', default=1.)
+@click.option('-s', '--sep', type=str, default='\n')
 @click.option('-S', 'soft', is_flag=True, default=False, type=bool, help='perform a softmax function on the input harms')
-def synadd(harmonics, block_size, freq, soft):
+def synadd(harmonics, block_size, freq, sep, soft):
     harms = np.asarray(harmonics, dtype=float)
     
     if len(harms) >= 1:
@@ -26,7 +27,7 @@ def synadd(harmonics, block_size, freq, soft):
         wt = W.additive(harms, np.arange(block_size), block_size)
 
 
-    [print(x) for x in W.lookup_oscil(freq, np.arange(block_size), wt, block_size)]
+    print(*W.lookup_oscil(freq, np.arange(block_size), wt, block_size), sep=sep)
 
 
 if __name__ == '__main__':
