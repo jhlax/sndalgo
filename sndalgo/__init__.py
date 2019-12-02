@@ -23,6 +23,7 @@ import sndalgo.pitch
 import sndalgo.util
 import sndalgo.waves
 import sndalgo.dsp
+import sndalgo.filters
 
 # shortcuts
 # from xenakis
@@ -30,3 +31,12 @@ from sndalgo.xenakis import Sieve
 
 # from pitch
 from sndalgo.pitch import ntof, fton, note_str, KEYS, TUNING_FREQUENCY
+
+# from waves
+from sndalgo.waves import waveform, lookup
+
+# from dsp
+from sndalgo.dsp import *
+
+# from filters
+from sndalgo.filters import *
