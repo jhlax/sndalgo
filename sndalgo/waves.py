@@ -74,11 +74,11 @@ def lookup_oscil(freq, t, wave, srate=SAMPLING_RATE):
     tablen = len(wave)
     incr = freq * tablen / srate
 
-    out = []
+    out = np.zeros(len(t))
 
-    for v in t:
+    for i, v in enumerate(t):
         x = wave[int(v * incr) % tablen]
-        out.append(x)
+        out[i] = x
 
     return out
 
