@@ -1,11 +1,14 @@
 import numpy as np
+import numba as nb
 
 
+@nb.njit
 def normalize(dat):
     max_ = np.max(np.abs(dat))
     return dat / max_
 
 
+@nb.njit
 def mix(*sigs):
     out = np.zeros(len(sigs[0]))
 
@@ -15,10 +18,12 @@ def mix(*sigs):
     return out
 
 
+@nb.njit
 def ring(dat, mod):
     out = dat * mod
     return out
 
 
+@nb.njit
 def rectify(dat):
     return np.abs(dat)

@@ -24,16 +24,17 @@ f = 2  # frequency
 s = 48000  # sampling rate
 t = np.arange(s)
 
-wform = waveform("harms", 1.0, 0.0, 0.222, 0.0, 0.0, 0.090909)
+wform = waveform("harms", 1.0, 0.0, 0.5, 0.0, 0.25, 0, 0.125)
 oscil = lookup(wform)
 out = oscil(2, t)
 
-mod = waveform("sine")
+mod = waveform("square")
 mod = lookup(mod)
-mod = mod(4, t)
-# mod = rectify(mod)
+mod = mod(1, t)
+mod = rectify(mod)
 
 out = ring(out, mod)
+out = normalize(out)
 
 print_sig(out)
 
