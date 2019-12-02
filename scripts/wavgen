@@ -15,8 +15,9 @@ BSIZE, SRATE, NHARMS = 8192, 48000, 32
 @click.option('--time', '-T', type=float, default=1.)
 @click.option('--freq', '-F', type=float, default=1.)
 @click.option('-D', '--digital', is_flag=True, default=False)
+@click.option('-s', '--sep', default='\n', type=str)
 @click.argument('harms', nargs=-1)
-def wavgen(waveform, bsize, nharms, srate, time, freq, digital, harms):
+def wavgen(waveform, bsize, nharms, srate, time, freq, digital, sep, harms):
     if len(harms):
         waveform = 'harms'
 
@@ -46,7 +47,7 @@ def wavgen(waveform, bsize, nharms, srate, time, freq, digital, harms):
 
     out = waves.lookup_oscil(freq, t, wtable, srate)
 
-    print(*out, sep='\n')
+    print(*out, sep=sep)
 
 
 if __name__ == '__main__':
