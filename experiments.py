@@ -11,6 +11,7 @@ from sndalgo.dsp import *
 from sndalgo.waves import *
 from sndalgo.pitch import *
 from sndalgo.xenakis import *
+from sndalgo.filters import bfilter
 
 
 bsize = 8192
@@ -31,12 +32,21 @@ out = oscil(2, t)
 mod = waveform("square")
 mod = lookup(mod)
 mod = mod(1, t)
-mod = rectify(mod)
+# mod = rectify(mod)
 
 out = ring(out, mod)
 out = normalize(out)
 
-print_sig(out)
+out = lookup(out)
+out = out(10, t)
+
+highaf = bfilter(out, 50, s, btype="high")
+lowaf = bfilter(out, 50, s, btype="low")
+
+# print(*out, sep=' ')
+
+print_sig(highaf, title="highpass")
+print_sig(lowaf, title="lowpass")
 
 # sig = S.waves.lookup_oscil(f, t, wt, s)
 # sig2 = S.waves.lookup_oscil(f ** 3, t, wt, s)
