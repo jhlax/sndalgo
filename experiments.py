@@ -25,25 +25,28 @@ f = 2  # frequency
 s = 48000  # sampling rate
 t = np.arange(s)
 
-wform = waveform("harms", 1.0, 0.0, 0.5, 0.0, 0.25, 0, 0.125)
+wform = waveform("square")
 oscil = lookup(wform)
-out = oscil(2, t)
+out = oscil(1, t)
 
-mod = waveform("square")
+mod = waveform("harms", 1.0, 0, 0.99)
 mod = lookup(mod)
-mod = mod(1, t)
+mod = mod(3, t)
+mod = fgain(mod, 0.666)
 # mod = rectify(mod)
 
 out = ring(out, mod)
 out = normalize(out)
 
 out = lookup(out)
-out = out(10, t)
+out = out(2, t)
 
-highaf = bfilter(out, 50, s, btype="high")
-lowaf = bfilter(out, 50, s, btype="low")
+highaf = bfilter(out, 4, s, btype="high", order=1, force_phase=True)
+lowaf = bfilter(out, 4, s, btype="low", order=1, force_phase=True)
 
 # print(*out, sep=' ')
+
+print_sig(out, title="original")
 
 print_sig(highaf, title="highpass")
 print_sig(lowaf, title="lowpass")
