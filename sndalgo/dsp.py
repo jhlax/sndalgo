@@ -17,6 +17,7 @@ def mix(*sigs):
 
     return out
 
+
 @nb.njit
 def fgain(dat, amp):
     out = dat * amp
