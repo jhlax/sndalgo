@@ -145,6 +145,6 @@ def lookup(wform, srate=48000, trunc=True):
 
 def fourier(sig, bsize=8192, norm=True):
     sig = np.fromiter(sig, dtype=float)
-    fft = np.fft.fft(sig, bsize, norm=("ortho" if norm else None))
+    fft = np.fft.rfft(sig, bsize, norm=("ortho" if norm else None))
     return fft
 
