@@ -33,7 +33,7 @@ from sndalgo.xenakis import Sieve
 from sndalgo.pitch import ntof, fton, note_str, KEYS, TUNING_FREQUENCY
 
 # from waves
-from sndalgo.waves import waveform, lookup
+from sndalgo.waves import waveform, lookup, fourier
 
 # from dsp
 from sndalgo.dsp import *

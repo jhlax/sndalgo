@@ -3,7 +3,6 @@ util.py / utility functions
 """
 
 import numpy as np
-import numba as nb
 import termplotlib as tpl
 
 
@@ -20,7 +19,6 @@ def flatten(val) -> list:
     return flat
 
 
-@nb.njit
 def softmax(tab):
     z = np.exp(np.abs(tab))
     m = np.max(np.abs(z))

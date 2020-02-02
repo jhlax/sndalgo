@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+import click
+import numpy as np
+
+from sndalgo.util import print_sig
+from sndalgo.waves import fourier
+
+@click.command()
+@click.option('-T', '--title', default='signal', type=str)
+@click.option('-W', '--width', default=130, type=int)
+@click.option('-H', '--height', default=30, type=int)
+@click.option('-B', '--base', default=0, type=int)
+@click.argument('samples', nargs=-1, type=float)
+def sigfft(title, width, height, base, samples):
+    if not len(samples):
+        samples = [float(samp) for samp in input().split()]
+
+    samples = np.asarray(samples, dtype=float)
+
+    fft = fourier(samples, 8192, True)
+
+    print_sig(fft[:len(fft) // 2], width=width, height=height, base=base, title=title)
+
+
+if __name__ == '__main__':
+    sigfft()

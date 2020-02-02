@@ -27,8 +27,6 @@ set theory, the python data model, functional programming, and an idea of
 computer science concepts like modulus are also good to know.
 """
 
-from numba import njit
-
 __author__ = "John Harrington"
 __version__ = "0.0.2"
 
@@ -97,7 +95,6 @@ def parse_sieve_str(res: str) -> list:
     return groups
 
 
-@njit
 def in_residual(v: int, res: tuple) -> bool:
     """
     checks to see if a value is valid for a residual.
@@ -128,7 +125,6 @@ def for_iter(res: tuple, z: list) -> list:
     return list(n for n in z if in_residual(n, res))
 
 
-@njit
 def norm_residual(res: tuple) -> tuple:
     """
     returns a normalized residual, with the shift being modulused by the

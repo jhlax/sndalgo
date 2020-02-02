@@ -15,13 +15,11 @@ compiled.
 """
 
 import numpy as np
-import numba as nb
 
 TUNING_FREQUENCY = 440.0
 KEYS = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"]
 
 
-@nb.njit
 def ntof(note: int) -> float:
     """
     returns the frequency for a given note.
@@ -30,7 +28,6 @@ def ntof(note: int) -> float:
     return TUNING_FREQUENCY * 2 ** ((note - 69) / 12)
 
 
-@nb.njit
 def fton(freq: float) -> float:
     """
     returns a note for the given frequency. use int() to cut of the

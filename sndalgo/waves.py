@@ -1,12 +1,10 @@
 import numpy as np
-import numba as nb
 from scipy import signal
 
 SAMPLING_RATE = 48000
 TWO_PI = np.pi * 2.0
 
 
-@nb.njit
 def sine(freq, t, srate=SAMPLING_RATE) -> np.ndarray:
     """
     this generates a sine wave for the given time integer array `t`
@@ -15,7 +13,6 @@ def sine(freq, t, srate=SAMPLING_RATE) -> np.ndarray:
     return np.sin(TWO_PI * freq * t / srate)
 
 
-@nb.njit
 def square_digital(freq, t, srate=SAMPLING_RATE) -> np.ndarray:
     """
     generates a digitally (ideal) square wave using a sine wave and
@@ -25,7 +22,6 @@ def square_digital(freq, t, srate=SAMPLING_RATE) -> np.ndarray:
     return np.sign(sine(freq, t, srate))
 
 
-@nb.njit
 def square_harms(nharms) -> np.ndarray:
     out = np.zeros(nharms * 2)
 
@@ -38,7 +34,6 @@ def square_harms(nharms) -> np.ndarray:
     return out
 
 
-@nb.njit
 def square_analog(freq, t, nharms, srate=SAMPLING_RATE) -> np.ndarray:
     """
     outputs an analog calculation of a square wave dependent on the number
@@ -64,7 +59,6 @@ def square_analog(freq, t, nharms, srate=SAMPLING_RATE) -> np.ndarray:
     return out
 
 
-@nb.njit
 def lookup_oscil(freq, t, wave, srate=SAMPLING_RATE):
     """
     takes a waveform lookup table and returns an array of amplitudes
@@ -147,3 +141,10 @@ def lookup(wform, srate=48000, trunc=True):
         raise NotImplemented(
             "linear interpolation oscillator has not been implemented yet"
         )
+
+
+def fourier(sig, bsize=8192, norm=True):
+    sig = np.fromiter(sig, dtype=float)
+    fft = np.fft.fft(sig, bsize, norm=("ortho" if norm else None))
+    return fft
+

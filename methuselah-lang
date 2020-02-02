@@ -1,0 +1,45 @@
+include (proc, rate, )
+x = 5  -- integer
+x = 5 #float  -- 5.0
+x = 5 @in #rate.hz  -- 5 hertz
+x = 0.2 @in #rate.period @as #rate.hz  -- convert period of 0.2 to hertz (5 hertz)
+
+string = "important words"  -- string literal
+string2 = string #float  -- error; string is character
+string2 = '3.3'  -- single brackets also fine
+string2 = string @in #float -- yes
+!string #float  -- same as above; also inplace; like @as #float
+!string #float  -- same as above
+string#float  -- returns what the above would be without changing the value of string
+
+!srate = 48000 @in #rate.hz  -- @in changes in place a literal or variable
+!srate = 48000  -- ! before var in assignment is constant
+!srate @system.srate = 48000  -- binded global srate to variable
+!@system.srate = 48000  -- same thing
+
+--+
+
+    so now i have enough to think i might be able to do this
+
++--
+
+-- example of sine oscillator --
+
+:snd.oscil sine(freq #rate.hz) #proc.generator {
+    freq * block.. * ~2PI / :system.srate :> @buf.out @in #float  -- make a sine wave
+    !buf.out = freq * block.. * ~2PI / :system.srate  -- same as above
+    !buf.out #float  -- make sure its a float
+
+    ~print(@proc.audio_out @like #fmt.raw)  -- print out raw audio samples
+
+    --+
+
+    frequency * the linspace of block * two pi high speed constant / the system's sampling rate
+
+    :> means write to
+    @proc.audio_out is the audio output stream for a @proc function
+
+
+    +--
+}
+

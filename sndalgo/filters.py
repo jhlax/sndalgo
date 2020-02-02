@@ -1,5 +1,4 @@
 import numpy as np
-import numba as nb
 from scipy.signal import butter, filtfilt, freqz, lfilter
 
 
