@@ -28,7 +28,7 @@ computer science concepts like modulus are also good to know.
 """
 
 __author__ = "John Harrington"
-__version__ = "0.0.2"
+__version__ = "0.023"
 
 
 def clean_sieve_str(res: str) -> str:
@@ -64,7 +64,7 @@ def parse_residual(res: str) -> tuple:
     else:
         modulus, shift = int(res), 0
 
-    return (modulus, shift, neg)
+    return modulus, shift, neg
 
 
 def parse_sieve_str(res: str) -> list:
@@ -137,7 +137,7 @@ def norm_residual(res: tuple) -> tuple:
     if len(res) == 2:
         res = (res[0], res[1], False)
 
-    return (res[0], res[1] % res[0], res[2])
+    return res[0], res[1] % res[0], res[2]
 
 
 def simplify_group(group: list) -> list:
@@ -159,10 +159,10 @@ def simplify_group(group: list) -> list:
         seek = 0
 
         while (
-            not all(
-                [in_residual(s, r), in_residual(s, group[0]), in_residual(s, group[1])]
-            )
-            and seek <= m
+                not all(
+                    [in_residual(s, r), in_residual(s, group[0]), in_residual(s, group[1])]
+                )
+                and seek <= m
         ):
             s += 1
             r = (m, s, False)
@@ -189,7 +189,7 @@ class Sieve:
     __slots__ = {
         "_residuals": "the private residuals list",
         "_cur_group": 'the current group, "last" by default but is generally an integer'
-        " denoting the index of the group in _residuals",
+                      " denoting the index of the group in _residuals",
     }
 
     _fmt: str = "set"
@@ -210,6 +210,7 @@ class Sieve:
         @param fmt: the default output format.
         """
 
+        self.transpose = 0
         self._cur_group = "last"
 
         loaded = False
@@ -251,6 +252,7 @@ class Sieve:
 
         for idx, group in enumerate(self._residuals):
             for jdx, residual in enumerate(group):
+                # noinspection PyTypeChecker
                 self._residuals[idx][jdx] = norm_residual(residual)
 
     @property
@@ -301,6 +303,7 @@ class Sieve:
         else:
             return "simple"
 
+    # noinspection PyTypeChecker
     @property
     def simple(self) -> str:
         """
@@ -451,6 +454,7 @@ class Sieve:
                     for residual in other._residuals[0]
                 ]
 
+            # noinspection PyTypeChecker
             new = Sieve(self)
             new._residuals[-1 if self._cur_group == "last" else self._cur_group] += push
 
