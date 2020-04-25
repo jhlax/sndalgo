@@ -1,5 +1,4 @@
 import numpy as np
-from scipy import signal
 
 SAMPLING_RATE = 48000
 TWO_PI = np.pi * 2.0
@@ -84,6 +83,7 @@ def additive(bins, t, srate=SAMPLING_RATE, normalize=True):
     @param bins: array of amplitudes; index 0 is the first harmonic (fundamental)
     @param t: the time range to calculate for
     @param srate: the sampling rate for the calculation
+    :param normalize: normalize to max of the abs of the array
     """
 
     out = []
@@ -147,4 +147,3 @@ def fourier(sig, bsize=8192, norm=True):
     sig = np.fromiter(sig, dtype=float)
     fft = np.fft.rfft(sig, bsize, norm=("ortho" if norm else None))
     return fft
-

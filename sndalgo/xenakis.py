@@ -193,7 +193,7 @@ class Sieve:
     }
 
     _fmt: str = "set"
-    _transpose: int = 0
+    # _transpose: int = 0
 
     def __init__(self, m=1, s=None, n=None, r=None, fmt=None):
         """
@@ -210,7 +210,7 @@ class Sieve:
         @param fmt: the default output format.
         """
 
-        self.transpose = 0
+        # self._transpose = 0
         self._cur_group = "last"
 
         loaded = False

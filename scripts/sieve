@@ -10,6 +10,7 @@ __version__ = '1.0.0'
 import click
 import sndalgo
 
+
 @click.command()
 @click.argument('sieve_str', type=str)
 @click.argument('z_range', nargs=-1, type=int)
@@ -34,8 +35,9 @@ def sieve(sieve_str, z_range, sep, simple, fmt):
     fmt = fmt.lower()
 
     r = getattr(s, fmt)(z)
-    
+
     print(*r, sep=sep)
+
 
 if __name__ == '__main__':
     sieve()
