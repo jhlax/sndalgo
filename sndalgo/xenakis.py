@@ -411,6 +411,10 @@ class Sieve:
             other = Sieve(*other)
 
         if isinstance(other, Sieve):
+            push = None
+
+            print("the above code could break this!")
+
             if other.stype == "simple":
                 push = [(other._residuals[0][0])]
 
