@@ -1,0 +1,63 @@
+---
+
+from mitochondrion:
+- joey: 1111_1
+- gino: 1111
+- jack: 1111_1
+- to: volcano
+
+---
+
+from volcano:
+- joey: 1111_111
+- gino: 1111_111
+- jack: 1111_1
+- to: snakehead
+
+---
+
+from snakehead:
+- joey: 111_1
+- gino: 111
+- jack: 1111_1
+- to: battle of midway (WWII)
+
+---
+
+from battle of midway (WWII):
+- joey: null
+- gino: 1111_1
+- jack: null
+- to: window
+
+---
+
+from window:
+- joey: 1111_11
+- gino: 1111
+- jack: 111
+- to: computer
+
+---
+
+from computer:
+- joey: 1111
+- gino: 1111
+- jack: 1111_1
+- to: disneyworld
+
+---
+
+from:
+- joey: 11
+- gino: 111
+- jack: 11
+- to: electricity
+
+---
+
+from electricity:
+- joey: 111
+- gino: 111
+- jack: 111
+- to: the great pyramid of giza

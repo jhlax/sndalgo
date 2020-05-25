@@ -211,6 +211,7 @@ class Sieve:
         """
 
         # self._transpose = 0
+        self.transpose = None
         self._cur_group = "last"
 
         loaded = False

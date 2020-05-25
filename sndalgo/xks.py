@@ -72,6 +72,10 @@ def operable_argument(func):
 
 
 def is_member(n, res, transpose=0):
+    """
+    checks to see if n is a member of res, with transposition and returns bool
+    """
+
     if isinstance(res, Group):
         if res.op_string == "&":
             outcome = True

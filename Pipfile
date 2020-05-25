@@ -19,6 +19,7 @@ termplotlib = "*"
 termtables = "*"
 python-rtmidi = "*"
 ptpython = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.8"

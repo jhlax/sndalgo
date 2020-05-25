@@ -46,7 +46,7 @@ def nokc(note: float) -> tuple:
     key = int(note) % 12
     cents = (note - int(note)) * 100
 
-    return (octave, key, cents)
+    return octave, key, cents
 
 
 def note_str(note: float) -> str:
