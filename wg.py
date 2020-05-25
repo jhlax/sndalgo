@@ -44,7 +44,23 @@ class WikipediaGolf(WGBase):
     the wg main object
     """
 
+    # class variables
+
     fp = None
+
+    # class methods
+
+    def create_data(self, name, players, **data):
+        self.data = {  # default dictionary for game data
+            "name":    name,  # name of the session
+            "n_holes": 6,  # holes per session before score and record
+            "c_hole":  0,  # current hole
+            "players": players,  # list of players
+            "scores":  {},  # todo: figure default; add option
+            "routes":  {},  # todo: above
+            "pages":   {},  # possibly a random page
+        }
+        self.data.update(data)  # update default with any given data
 
     def __init__(self, players=None, name=None, **data):
         """
@@ -63,15 +79,8 @@ class WikipediaGolf(WGBase):
 
         # set instance variables
 
-        self.data = {  # default dictionary for game data
-            "name":    name,  # name of the session
-            "n_holes": 6,  # holes per session before score and record
-            "players": players,
-            "scores":  [],  # todo: figure default; add option
-            "routes":  [],  # todo: above
-            "pages":   [],  # possibly a random page
-        }
-        self.data.update(data)  # update default with any given data
+        self.create_data(name, players, **data)
+
         self.fp = Path("_".join(name.split(" ")))
 
     # computed properties
@@ -90,7 +99,7 @@ class WikipediaGolf(WGBase):
 
     @property
     def n_holes(self):
-        raise NotImplementedError
+        return self.data["n_holes"]
 
     @property
     def players(self):
@@ -135,7 +144,25 @@ class WikipediaGolf(WGBase):
         """
         load yaml file to new wg object.
         """
-        raise NotImplementedError
+
+        fp = Path(fp)
+        with open(fp, "r") as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
+            return WikipediaGolf(**data)
+
+        # raise NotImplementedError
+
+    #
+    # game setup functions and methods
+    #
+
+    def add_player(self, name):
+        name = name.lower()
+
+        self.players.append(name)
+        self.scores[name] = {}
+        self.routes[name] = {}
+        self.pages[name] = {}
 
     #
     # active game methods
@@ -199,5 +226,10 @@ __all__ = [
 if __name__ == '__main__':
     # main function
 
-    wg = WG()
-    wg.save()
+    # wg = WG()
+    # wg.save()
+
+    wg = WG.load(r"C:\Users\jhlax\PycharmProjects\sndalgo\Parkland_Exhibition_League_20200525_084326-102352.yml")
+    wg.players.append("jimmy")
+    wg.players.append("joey")
+    print(wg.data)
