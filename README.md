@@ -204,3 +204,10 @@ we need utilities like:
 
 over time, this will be a huge tool for synthesis and processing of sound. hopefully.
 
+# update jan 1 2020
+
+try some things out:
+
+```bash
+scripts/modulus -m 2 `./sieve '{3@0} & -3 | 2 | 3@2 & 5@3' -S 0 100  | tr '\n' ' ' 2>/dev/null` | tr '\n' ' ' && echo
+```

@@ -27,6 +27,8 @@ set theory, the python data model, functional programming, and an idea of
 computer science concepts like modulus are also good to know.
 """
 
+import sys
+
 __author__ = "John Harrington"
 __version__ = "0.023"
 
@@ -416,7 +418,7 @@ class Sieve:
         if isinstance(other, Sieve):
             push = None
 
-            print("the above code could break this!")
+            #print("the above code could break this!", file=sys.stderr)
 
             if other.stype == "simple":
                 push = [(other._residuals[0][0])]
