@@ -60,7 +60,10 @@ def parse_residual(res: str) -> tuple:
         neg = False
 
     if "@" in res:
-        modulus, shift = (int(_) for _ in res.split("@"))
+        if res[0].isdigit():
+            modulus, shift = (int(_) for _ in res.split("@"))
+        else:
+            modulus, shift, neg = parse_residual(res[1:-1])
     else:
         modulus, shift = int(res), 0
 
@@ -186,14 +189,14 @@ class Sieve:
     the xenakis sieve, all-in-one class.
     """
 
-    __slots__ = {
-        "_residuals": "the private residuals list",
-        "_cur_group": 'the current group, "last" by default but is generally an integer'
-                      " denoting the index of the group in _residuals",
-    }
+#    __slots__ = {
+#        "_residuals": "the private residuals list",
+#        "_cur_group": 'the current group, "last" by default but is generally an integer'
+#                      " denoting the index of the group in _residuals",
+#    }
 
     _fmt: str = "set"
-    # _transpose: int = 0
+    #_transpose: int = 0
 
     def __init__(self, m=1, s=None, n=None, r=None, fmt=None):
         """
@@ -210,8 +213,7 @@ class Sieve:
         @param fmt: the default output format.
         """
 
-        # self._transpose = 0
-        self.transpose = None
+        self._transpose = 0
         self._cur_group = "last"
 
         loaded = False
@@ -472,3 +474,12 @@ class Sieve:
 
         self.transpose += other
         return self
+
+    @property
+    def transpose(self):
+        return self._transpose
+
+    @transpose.setter
+    def transpose(self, other):
+        self._transpose = other
+
