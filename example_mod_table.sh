@@ -1,0 +1,1 @@
+scripts/modulus -m 30 `./sieve '{1@0}' -S 0 100  | tr '\n' ' ' 2>/dev/null` | tr '\n' ' '| column --table --table-columns C1,C2 --table-wrap C2 --output-width 30 --separator ' ' --table-noheadings | fold -w 30 -s | column --table
